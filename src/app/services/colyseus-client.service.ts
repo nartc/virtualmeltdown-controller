@@ -37,12 +37,13 @@ export class ColyseusClientService {
     this.setName(username);
     const joinOptions = new GameRoomAuthOptions();
     joinOptions.username = username;
-    return fromPromise(this._client.joinById<GameState>(roomId, joinOptions))
+    return fromPromise(this._client.joinById<GameState>('aaaaa'.concat(roomId), joinOptions))
       .pipe(
         catchError(err => {
-          const ref = this.ngbModal.open(ErrorDialogComponent, { backdrop: 'static', centered: true });
-          ref.componentInstance.errorMessage = err.message ||
-            'Error joining a room. Most likely, the server is not running.';
+          if (err instanceof ProgressEvent) {
+            const ref = this.ngbModal.open(ErrorDialogComponent, { backdrop: 'static', centered: true });
+            ref.componentInstance.errorMessage = 'Error joining a room. Most likely, the server is not running.';
+          }
           return throwError(err);
         })
       );
