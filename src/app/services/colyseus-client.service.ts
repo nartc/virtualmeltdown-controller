@@ -29,4 +29,8 @@ export class ColyseusClientService {
         })
       );
   }
+
+  move(vector: { x: number, y: number }) {
+    this._room.send({ vector, eventType: 'move' });
+  }
 }

@@ -8,6 +8,9 @@ const routes: Routes = [
   },
   {
     path: 'join', loadChildren: () => import('./join/join.module').then(m => m.JoinModule)
+  },
+  {
+    path: 'controller', loadChildren: () => import('./controller/controller.module').then(m => m.ControllerModule)
   }
 ];
 

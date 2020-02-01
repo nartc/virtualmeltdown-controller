@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ColyseusClientService } from '../services/colyseus-client.service';
 
 @Component({
@@ -43,7 +44,11 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
 export class JoinContainerComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private readonly colyseusClientService: ColyseusClientService, private readonly fb: FormBuilder) {
+  constructor(
+    private readonly colyseusClientService: ColyseusClientService,
+    private readonly fb: FormBuilder,
+    private readonly router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -54,6 +59,6 @@ export class JoinContainerComponent implements OnInit {
   }
 
   onJoin() {
-
+    this.router.navigate(['/controller']);
   }
 }
