@@ -1,21 +1,18 @@
-import { Component } from '@angular/core';
-import * as Colyseus from 'colyseus.js';
+import { Component, OnInit } from '@angular/core';
+import { ColyseusClientService } from './services/colyseus-client.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'gamejam2020-controller';
 
+  constructor(private readonly colyseusClientService: ColyseusClientService) {
+  }
+
   ngOnInit() {
-    // const client = new Colyseus.Client('ws://localhost:3000');
-    // client.create('game').then(room => {
-    //   console.log(room);
-    //   room.onMessage(data => {
-    //     console.log(data);
-    //   });
-    // });
+    this.colyseusClientService.create();
   }
 }

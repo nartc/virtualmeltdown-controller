@@ -23,6 +23,6 @@ export class ControllerContainerComponent implements OnInit {
   }
 
   onMove(vector: { x: number; y: number }) {
-
+    this.colyseusClientService.move(vector);
   }
 }

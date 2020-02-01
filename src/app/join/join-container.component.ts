@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { ColyseusClientService } from '../services/colyseus-client.service';
 
 @Component({
@@ -59,6 +60,12 @@ export class JoinContainerComponent implements OnInit {
   }
 
   onJoin() {
-    this.router.navigate(['/controller']);
+    const {roomId, username} = this.form.value;
+    this.colyseusClientService.join(roomId, username)
+      .pipe(take(1))
+      .subscribe(room => {
+        this.colyseusClientService.setRoom(room);
+        this.router.navigate(['/controller']);
+      });
   }
 }
