@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "gamejam2020-controller"
+    }
+  },
+  "defaultProject": "gamejam2020-controller",
+  "cli": {
+    "analytics": false
+  }
 }
