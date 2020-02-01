@@ -21,6 +21,7 @@ export class ColyseusClientService {
 
   constructor(private readonly ngbModal: NgbModal) {
     this._client = new Colyseus.Client('ws://localhost:3000');
+    // this._client = new Colyseus.Client('ws:12c5439f.ngrok.io');
   }
 
   isConnected$(): Observable<boolean> {
