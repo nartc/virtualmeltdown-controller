@@ -20,6 +20,9 @@ export class ControllerContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (window) {
+      window.onbeforeunload = this.ngOnDestroy.bind(this);
+    }
   }
 
   onMove(vector: { x: number; y: number }) {

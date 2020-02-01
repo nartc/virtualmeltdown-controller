@@ -21,18 +21,11 @@ export class ColyseusClientService {
 
   constructor(private readonly ngbModal: NgbModal) {
     this._client = new Colyseus.Client('ws://localhost:3000');
-    // this._client = new Colyseus.Client('ws:12c5439f.ngrok.io');
   }
 
   isConnected$(): Observable<boolean> {
     return of(this._room)
       .pipe(map(room => !!room));
-  }
-
-  setPlayer() {
-    if (this._room) {
-      this._playerSubject.next(this._room.state.players[this._room.sessionId + '_' + this._nameSubject.value]);
-    }
   }
 
   setName(name: string) {
@@ -42,7 +35,9 @@ export class ColyseusClientService {
   setRoom(room: Colyseus.Room<GameState>) {
     console.log('setRoom', { ...room });
     this._room = room;
-    this.setPlayer();
+    this._room.state.players.onChange = changes => {
+      this._playerSubject.next(changes);
+    };
   }
 
   create() {
@@ -69,7 +64,6 @@ export class ColyseusClientService {
   move(vector: { x: number, y: number }) {
     try {
       const message = new MoveMessage();
-      console.log(vector.x, vector.y);
       message.vector.x = vector.x;
       message.vector.y = vector.y;
       message.username = this._nameSubject.value;
