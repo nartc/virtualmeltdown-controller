@@ -8,18 +8,8 @@
 import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/schema";
 
 
-export class Player extends Schema {
-    @type("string") public name: string;
-    @type("string") public status: string;
-    @type("string") public role: string;
-    @type("float32") public horizontal: number;
-    @type("float32") public vertical: number;
-    @type("float32") public currentX: number;
-    @type("float32") public currentY: number;
-    @type("float32") public facingX: number;
-    @type("float32") public facingY: number;
-    @type("int8") public speed: number;
-    @type("string") public color: string;
+export class GameRoomOptions extends Schema {
+    @type("int8") public maxClients: number;
 
     constructor () {
         super();
