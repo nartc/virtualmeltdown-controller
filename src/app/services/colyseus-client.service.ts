@@ -5,7 +5,9 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError } from 'rxjs/operators';
 import { ErrorDialogComponent } from '../layouts/error-dialog.component';
+import { GameRoomAuthOptions } from '../states/GameRoomAuthOptions';
 import { GameState } from '../states/GameState';
+import { MoveMessage } from '../states/MoveMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +35,9 @@ export class ColyseusClientService {
 
   join(roomId: string, username: string): Observable<Colyseus.Room<GameState>> {
     this.setName(username);
-    return fromPromise(this._client.joinById<GameState>(roomId, { username }))
+    const joinOptions = new GameRoomAuthOptions();
+    joinOptions.username = username;
+    return fromPromise(this._client.joinById<GameState>(roomId, joinOptions))
       .pipe(
         catchError(err => {
           const ref = this.ngbModal.open(ErrorDialogComponent, { backdrop: 'static', centered: true });
@@ -45,6 +49,11 @@ export class ColyseusClientService {
   }
 
   move(vector: { x: number, y: number }) {
-    this._room.send({ vector, eventType: 'move', username: this._nameSubject.value });
+    const message = new MoveMessage();
+    message.vector.x = vector.x;
+    message.vector.y = vector.y;
+    message.username = this._nameSubject.value;
+    message.eventType = 'move';
+    this._room.send(message);
   }
 }

@@ -10,6 +10,7 @@ import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/sche
 
 export class GameRoomOptions extends Schema {
     @type("int8") public maxClients: number;
+    @type("boolean") public isHost: boolean;
 
     constructor () {
         super();
