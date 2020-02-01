@@ -6,18 +6,13 @@
 // 
 
 import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/schema";
-import { Inventory } from "./Inventory"
 
-export class Player extends Schema {
-    @type("string") public id: string;
-    @type("string") public name: string;
-    @type("string") public status: string;
-    @type("string") public type: string;
-    @type("float32") public horizontal: number;
-    @type("float32") public vertical: number;
-    @type("int8") public speed: number;
-    @type(Inventory) public inventory: Inventory = new Inventory();
-    @type(Inventory) public inventoryLimit: Inventory = new Inventory();
+
+export class Inventory extends Schema {
+    @type("int8") public red: number;
+    @type("int8") public blue: number;
+    @type("int8") public green: number;
+    @type("int8") public yellow: number;
 
     constructor () {
         super();

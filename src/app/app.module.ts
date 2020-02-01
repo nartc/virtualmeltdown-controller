@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,14 +9,16 @@ import { ErrorDialogComponent } from './layouts/error-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbDropdownModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -10,6 +10,7 @@ import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/sche
 
 export class GameRoomAuthOptions extends Schema {
     @type("string") public username: string;
+    @type("string") public type: string;
 
     constructor () {
         super();

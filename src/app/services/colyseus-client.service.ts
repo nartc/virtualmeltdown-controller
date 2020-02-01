@@ -39,7 +39,7 @@ export class ColyseusClientService {
   }
 
   setRoom(room: Colyseus.Room<GameState>) {
-    console.log('setRoom', {...room});
+    console.log('setRoom', { ...room });
     this._room = room;
     this.setPlayer();
   }
@@ -48,10 +48,11 @@ export class ColyseusClientService {
     this._client.create('game');
   }
 
-  join(roomId: string, username: string): Observable<Colyseus.Room<GameState>> {
+  join(roomId: string, username: string, type: string): Observable<Colyseus.Room<GameState>> {
     this.setName(username);
     const joinOptions = new GameRoomAuthOptions();
     joinOptions.username = username;
+    joinOptions.type = type;
     return fromPromise(this._client.joinById<GameState>('aaaaa'.concat(roomId), joinOptions))
       .pipe(
         catchError(err => {
