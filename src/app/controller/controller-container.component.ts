@@ -6,8 +6,8 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
   template: `
     <div class="container-fluid row h-100 w-100">
       <div class="col-6 position-relative" appJoystick (move)="onMove($event)"></div>
-      <div class="col-6">
-        items
+      <div class="col-6 position-relative">
+        <app-item-button [iconClass]="'la-bolt'"></app-item-button>
       </div>
     </div>
   `,
