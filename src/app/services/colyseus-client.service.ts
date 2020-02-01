@@ -50,11 +50,17 @@ export class ColyseusClientService {
   }
 
   move(vector: { x: number, y: number }) {
-    const message = new MoveMessage();
-    message.vector.x = vector.x;
-    message.vector.y = vector.y;
-    message.username = this._nameSubject.value;
-    message.eventType = 'move';
-    this._room.send(message);
+    try {
+      const message = new MoveMessage();
+      console.log(vector.x, vector.y);
+      message.vector.x = vector.x;
+      message.vector.y = vector.y;
+      message.username = this._nameSubject.value;
+      message.eventType = 'move';
+      this._room.send(message);
+    } catch (e) {
+      // TODO: handle error
+      return;
+    }
   }
 }
