@@ -68,10 +68,10 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
 export class JoinContainerComponent implements OnInit {
   form: FormGroup;
   robotTypes: {label: string, value: string}[] = [
-    {label: 'Robot A', value: 'a'},
-    {label: 'Robot B', value: 'b'},
-    {label: 'Robot C', value: 'c'},
-    {label: 'Robot D', value: 'd'},
+    {label: 'Cube Bot', value: 'a'},
+    {label: 'Spidey Bot', value: 'b'},
+    {label: 'Sphere Bot', value: 'c'},
+    // {label: 'Robot D', value: 'd'},
   ];
 
   constructor(
