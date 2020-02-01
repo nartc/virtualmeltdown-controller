@@ -72,4 +72,13 @@ export class ColyseusClientService {
       return;
     }
   }
+
+  stun() {
+    try {
+
+    } catch (e) {
+      // TODO: handle error
+      return;
+    }
+  }
 }

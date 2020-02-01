@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-item-button',
   template: `
-    <button class="item-btn" type="button">
+    <button class="item-btn" type="button" (click)="press.emit(label)">
       <i class="las" [ngClass]="iconClass"></i>
     </button>
-    <h5 class="mb-0 ml-1">Stun</h5>
+    <h5 class="mb-0 ml-1">{{label}}</h5>
   `,
   styles: [
       `
@@ -52,13 +52,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemButtonComponent implements OnInit {
+export class ItemButtonComponent {
   @Input() iconClass: string;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
+  @Input() label: string;
+  @Output() press: EventEmitter<string> = new EventEmitter<string>();
 }
