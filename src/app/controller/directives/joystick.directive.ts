@@ -31,8 +31,8 @@ export class JoystickDirective implements AfterViewInit, OnDestroy {
         zone: this.el.nativeElement,
         mode: 'static',
         position: {
-          bottom: '100px',
-          left: '100px'
+          bottom: '115px',
+          left: '115px'
         },
         fadeTime: 200,
         maxNumberOfNipples: 1,

@@ -6,16 +6,10 @@
 // 
 
 import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/schema";
+import { GameMessage } from "./GameMessage"
 
-
-export class Player extends Schema {
-    @type("string") public id: string;
-    @type("string") public name: string;
-    @type("string") public status: string;
-    @type("string") public role: string;
-    @type("float32") public horizontal: number;
-    @type("float32") public vertical: number;
-    @type("string") public color: string;
+export class StunMessage extends GameMessage {
+    @type("string") public targetId: string;
 
     constructor () {
         super();

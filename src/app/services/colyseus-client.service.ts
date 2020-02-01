@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 import { GameRoomAuthOptions } from '../states/GameRoomAuthOptions';
 import { GameState } from '../states/GameState';
 import { MoveMessage } from '../states/MoveMessage';
+import { Player } from '../states/Player';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,16 @@ export class ColyseusClientService {
   private _client: Colyseus.Client;
   private _room: Colyseus.Room<GameState>;
   private _nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _playerSubject: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
 
   constructor(private readonly ngbModal: NgbModal) {
     this._client = new Colyseus.Client('ws://localhost:3000');
+  }
+
+  setPlayer() {
+    if (this._room) {
+      this._playerSubject.next(this._room.state.players[this._room.sessionId + '_' + this._nameSubject.value]);
+    }
   }
 
   setName(name: string) {
@@ -27,6 +35,7 @@ export class ColyseusClientService {
 
   setRoom(room: Colyseus.Room<GameState>) {
     this._room = room;
+    this.setPlayer();
   }
 
   create() {
