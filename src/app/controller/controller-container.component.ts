@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ColyseusClientService } from '../services/colyseus-client.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ControllerContainerComponent implements OnInit {
+export class ControllerContainerComponent implements OnInit, OnDestroy {
 
   constructor(private readonly colyseusClientService: ColyseusClientService) {
   }
@@ -28,5 +28,9 @@ export class ControllerContainerComponent implements OnInit {
 
   onPress(label: string) {
 
+  }
+
+  ngOnDestroy(): void {
+    this.colyseusClientService.disconnect();
   }
 }

@@ -62,7 +62,6 @@ export class JoinContainerComponent implements OnInit {
   onJoin() {
     const {roomId, username} = this.form.value;
     this.colyseusClientService.join(roomId, username)
-      .pipe(take(1))
       .subscribe(room => {
         this.colyseusClientService.setRoom(room);
         this.router.navigate(['/controller']);

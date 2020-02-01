@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as Colyseus from 'colyseus.js';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 import { GameRoomAuthOptions } from '../states/GameRoomAuthOptions';
 import { GameState } from '../states/GameState';
@@ -23,6 +23,11 @@ export class ColyseusClientService {
     this._client = new Colyseus.Client('ws://localhost:3000');
   }
 
+  isConnected$(): Observable<boolean> {
+    return of(this._room)
+      .pipe(map(room => !!room));
+  }
+
   setPlayer() {
     if (this._room) {
       this._playerSubject.next(this._room.state.players[this._room.sessionId + '_' + this._nameSubject.value]);
@@ -34,6 +39,7 @@ export class ColyseusClientService {
   }
 
   setRoom(room: Colyseus.Room<GameState>) {
+    console.log('setRoom', {...room});
     this._room = room;
     this.setPlayer();
   }
@@ -67,6 +73,15 @@ export class ColyseusClientService {
       message.username = this._nameSubject.value;
       message.eventType = 'move';
       this._room.send(message);
+    } catch (e) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  disconnect() {
+    try {
+      this._room.leave(true);
     } catch (e) {
       // TODO: handle error
       return;

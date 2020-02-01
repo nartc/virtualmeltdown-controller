@@ -45,7 +45,7 @@ export class JoystickDirective implements AfterViewInit, OnDestroy {
   }
 
   private _registerJoystickListener() {
-    const joystick = this._manager.get(0);
+    const joystick = this._manager[0];
     if (joystick) {
       this._setJoystickStyle(joystick);
       joystick.on('move', (evt1, data) => {
