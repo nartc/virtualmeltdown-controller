@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'virtualmeltown-devserver.azurewebsites.net'
+  serverUrl: 'wss://virtualmeltown-devserver.azurewebsites.net:80'
 };
