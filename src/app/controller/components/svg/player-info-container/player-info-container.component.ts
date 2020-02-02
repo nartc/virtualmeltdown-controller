@@ -4,7 +4,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
   selector: 'player-info-container',
   template: `
     <div class="d-flex flex-direction-row player-container">
-      <img src="assets/gif/spiderbot.gif" alt="" class="spider-anim">
+      <img [src]="robotGifMap[playerType]" alt="" class="spider-anim">
       <div class="player-text-container">
         <h3 class="player-text">{{playerName}}</h3>
         <p class="player-text">{{playerMessage}}</p>
@@ -32,7 +32,14 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 })
 export class PlayerInfoContainerComponent implements OnInit {
   @Input() playerName: string;
+  @Input() playerType: string;
   @Input() playerMessage: string;
+
+  robotGifMap = {
+    a: "assets/gif/cubot.gif",
+    b: "assets/gif/spiderbot.gif",
+    c: "assets/gif/spherebot.gif"
+  };
 
   constructor() { }
 

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { ColyseusClientService } from '../services/colyseus-client.service';
 import { Player } from '../states/Player';
 
@@ -8,6 +10,7 @@ import { Player } from '../states/Player';
   template: `
     <div class="container-fluid row h-100 w-100 root-background" *ngIf="player$ | async as player">
       <player-info-container class="col-10"
+                             [playerType]="player.type"
                              [playerName]="player.name"
                              [playerMessage]="playerMessage"></player-info-container>
       <div class="col-2 position-relative">
@@ -49,7 +52,7 @@ export class ControllerContainerComponent implements OnInit, OnDestroy {
   public playerMessage = 'Sweet apple pie oat cake fruitcake sesame snaps wafer. Pudding cotton candy powder cotton candy';
   public player$: Observable<Player>;
 
-  constructor(private readonly colyseusClientService: ColyseusClientService) {
+  constructor(private readonly colyseusClientService: ColyseusClientService, private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -57,6 +60,10 @@ export class ControllerContainerComponent implements OnInit, OnDestroy {
     if (window) {
       window.onbeforeunload = this.ngOnDestroy.bind(this);
     }
+
+    this.colyseusClientService.connectionClose$().pipe(take(1)).subscribe(() => {
+      this.router.navigate(['/join']);
+    });
   }
 
   onMove(vector: { x: number; y: number }) {

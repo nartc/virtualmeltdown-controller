@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as Colyseus from 'colyseus.js';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorDialogComponent } from '../layouts/error-dialog.component';
@@ -18,6 +18,7 @@ export class ColyseusClientService {
   private _room: Colyseus.Room<GameState>;
   private _nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _playerSubject: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
+  private _leaveSubject: Subject<null> = new Subject<null>();
 
   constructor(private readonly ngbModal: NgbModal) {
     this._client = new Colyseus.Client('ws://localhost:3000');
@@ -32,6 +33,10 @@ export class ColyseusClientService {
       .pipe(map(room => !!room));
   }
 
+  connectionClose$(): Observable<null> {
+    return this._leaveSubject.asObservable();
+  }
+
   setName(name: string) {
     this._nameSubject.next(name);
   }
@@ -42,6 +47,7 @@ export class ColyseusClientService {
     this._room.state.players.onChange = changes => {
       this._playerSubject.next(changes);
     };
+    this._room.connection.onCloseCallback = this._leaveSubject.next.bind(this._leaveSubject);
   }
 
   create() {
