@@ -98,6 +98,7 @@ export class ColyseusClientService {
 
   disconnect() {
     try {
+      this._playerSubject.next(null);
       this._room.leave(true);
     } catch (e) {
       // TODO: handle error
