@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'ws://localhost:3000'
+  serverUrl: 'ws://8fd3b885.ngrok.io'
 };
 
 /*
