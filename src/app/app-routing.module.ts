@@ -9,6 +9,9 @@ const routes: Routes = [
     path: '', component: HomeComponent,
   },
   {
+    path: 'help', loadChildren: () => import('./help/help.module').then(m => m.HelpModule)
+  },
+  {
     path: 'join', loadChildren: () => import('./join/join.module').then(m => m.JoinModule)
   },
   {

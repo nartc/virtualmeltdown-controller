@@ -5,12 +5,12 @@ import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 import { DepositMessage } from '../../states/DepositMessage';
 import { GameRoomAuthOptions } from '../../states/GameRoomAuthOptions';
 import { GameState } from '../../states/GameState';
 import { MoveMessage } from '../../states/MoveMessage';
 import { Player } from '../../states/Player';
+import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,8 @@ import { Player } from '../../states/Player';
 export class ColyseusClientService {
   private _client: Colyseus.Client;
   private _room: Colyseus.Room<GameState>;
-  private _nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem(
+    'virtualmeltdown_username') || '');
   private _playerSubject: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
   private _leaveSubject: Subject<null> = new Subject<null>();
 
@@ -35,12 +36,17 @@ export class ColyseusClientService {
       .pipe(map(room => !!room));
   }
 
+  username$(): Observable<string> {
+    return this._nameSubject.asObservable();
+  }
+
   connectionClose$(): Observable<null> {
     return this._leaveSubject.asObservable();
   }
 
   setName(name: string) {
     this._nameSubject.next(name);
+    localStorage.setItem('virtualmeltdown_username', name);
   }
 
   setRoom(room: Colyseus.Room<GameState>) {

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { take } from 'rxjs/operators';
 import { ErrorDialogComponent } from '../common/layouts/error-dialog.component';
 import { ColyseusClientService } from '../common/services/colyseus-client.service';
 
@@ -64,18 +65,21 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
       </div>
     </form>
   `,
-  styles: [`
-    .join-container {
-      background-color: black;
-      background-image: URL('assets/svg/backPattern.svg');
-      width: 100%;
-      color: #40ebee;
-    }
-    .join-button {
-      background-color: #40ebee;
-      color: black;
-    }
-  `],
+  styles: [
+      `
+      .join-container {
+        background-color: black;
+        background-image: URL('assets/svg/backPattern.svg');
+        width: 100%;
+        color: #40ebee;
+      }
+
+      .join-button {
+        background-color: #40ebee;
+        color: black;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JoinContainerComponent implements OnInit {
@@ -100,6 +104,12 @@ export class JoinContainerComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(4)]],
       roomId: ['', Validators.required],
       type: ['', Validators.required]
+    });
+
+    this.colyseusClientService.username$().pipe(take(1)).subscribe(val => {
+      if (val) {
+        this.form.get('username').setValue(val);
+      }
     });
   }
 
