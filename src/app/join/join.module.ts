@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownControlModule } from '../components/dropdown-control/dropdown-control.module';
 import { JoinContainerComponent } from './join-container.component';
 
@@ -13,6 +14,7 @@ import { JoinRoutingModule } from './join-routing.module';
     ReactiveFormsModule,
     JoinRoutingModule,
     DropdownControlModule,
+    NgbModalModule
   ]
 })
 export class JoinModule {

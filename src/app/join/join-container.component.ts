@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 import { ColyseusClientService } from '../services/colyseus-client.service';
 
 @Component({
@@ -67,17 +69,18 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
 })
 export class JoinContainerComponent implements OnInit {
   form: FormGroup;
-  robotTypes: {label: string, value: string}[] = [
-    {label: 'Cube Bot', value: 'a'},
-    {label: 'Spidey Bot', value: 'b'},
-    {label: 'Sphere Bot', value: 'c'},
+  robotTypes: { label: string, value: string }[] = [
+    { label: 'Cube Bot', value: 'a' },
+    { label: 'Spidey Bot', value: 'b' },
+    { label: 'Sphere Bot', value: 'c' },
     // {label: 'Robot D', value: 'd'},
   ];
 
   constructor(
     private readonly colyseusClientService: ColyseusClientService,
     private readonly fb: FormBuilder,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly ngbModal: NgbModal
   ) {
   }
 
@@ -95,6 +98,11 @@ export class JoinContainerComponent implements OnInit {
       .subscribe(room => {
         this.colyseusClientService.setRoom(room);
         this.router.navigate(['/controller']);
+      }, err => {
+        if (!(err instanceof ProgressEvent)) {
+          const ref = this.ngbModal.open(ErrorDialogComponent, { centered: true, backdrop: true });
+          ref.componentInstance.errorMessage = err.message || 'Meh.';
+        }
       });
   }
 }
