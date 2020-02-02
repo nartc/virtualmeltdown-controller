@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorDialogComponent } from '../layouts/error-dialog.component';
+import { DepositMessage } from '../states/DepositMessage';
 import { GameRoomAuthOptions } from '../states/GameRoomAuthOptions';
 import { GameState } from '../states/GameState';
 import { MoveMessage } from '../states/MoveMessage';
@@ -101,6 +102,21 @@ export class ColyseusClientService {
     } catch (e) {
       // TODO: handle error
       return;
+    }
+  }
+
+  deposit(color: string) {
+    try {
+      const message = new DepositMessage();
+      message.payload = 1;
+      message.color = color;
+      message.playerId = this._playerSubject.value.id;
+      message.eventType = 'deposit';
+      message.username = this._playerSubject.value.name;
+      this._room.send(message);
+    } catch (e) {
+      // TODO: handle error
+      return ;
     }
   }
 }

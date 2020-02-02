@@ -17,24 +17,19 @@ import { Player } from '../states/Player';
         <h6 class="text-danger mb-0">Leave Button</h6>
       </div>
       <div class="col-4 position-relative" appJoystick (move)="onMove($event)"></div>
-      <div class="col-4 position-relative">
-        <app-info-button-svg imgSrc="assets/jpg/bluePickup.jpg"
-                             title="Blue"
-                             [item]="player.inventory.blue"
-                             [itemLimit]="player.inventoryLimit.blue"></app-info-button-svg>
-        <app-info-button-svg imgSrc="assets/jpg/redPickup.jpg" title="Red"
-                             [item]="player.inventory.red"
-                             [itemLimit]="player.inventoryLimit.red"></app-info-button-svg>
+      <div class="col-8 position-relative">
+        <div class="row m-0 p-0">
+          <app-info-button-svg *ngFor="let color of colors"
+                               class="col-6"
+                               (deposit)="onDeposit(color.value)"
+                               [color]="color.value"
+                               [inRange]="player.inRange"
+                               [imgSrc]="color.image"
+                               [title]="color.title"
+                               [item]="player.inventory[color.value]"
+                               [itemLimit]="player.inventoryLimit[color.value]"></app-info-button-svg>
+        </div>
       </div>
-      <div class="col-4 position-relative">
-        <app-info-button-svg imgSrc="assets/jpg/greenPickup.jpg" title="Green"
-                             [item]="player.inventory.green"
-                             [itemLimit]="player.inventoryLimit.green"></app-info-button-svg>
-        <app-info-button-svg imgSrc="assets/jpg/yellowPickup.jpg" title="Yellow"
-                             [item]="player.inventory.yellow"
-                             [itemLimit]="player.inventoryLimit.yellow"></app-info-button-svg>
-      </div>
-    </div>
   `,
   styles: [
       `.root-background {
@@ -49,8 +44,14 @@ import { Player } from '../states/Player';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ControllerContainerComponent implements OnInit, OnDestroy {
-  public playerMessage = 'Sweet apple pie oat cake fruitcake sesame snaps wafer. Pudding cotton candy powder cotton candy';
-  public player$: Observable<Player>;
+  playerMessage = 'Sweet apple pie oat cake fruitcake sesame snaps wafer. Pudding cotton candy powder cotton candy';
+  player$: Observable<Player>;
+  colors = [
+    { label: 'Red', value: 'red', image: 'assets/jpg/redPickup.jpg' },
+    { label: 'Green', value: 'green', image: 'assets/jpg/greenPickup.jpg' },
+    { label: 'Blue', value: 'blue', image: 'assets/jpg/bluePickup.jpg' },
+    { label: 'Yellow', value: 'yellow', image: 'assets/jpg/yellowPickup.jpg' },
+  ];
 
   constructor(private readonly colyseusClientService: ColyseusClientService, private readonly router: Router) {
   }
@@ -76,5 +77,9 @@ export class ControllerContainerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.colyseusClientService.disconnect();
+  }
+
+  onDeposit(color: string) {
+    this.colyseusClientService.deposit(color);
   }
 }

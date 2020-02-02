@@ -18,6 +18,7 @@ export class Player extends Schema {
     @type("int8") public speed: number;
     @type(Inventory) public inventory: Inventory = new Inventory();
     @type(Inventory) public inventoryLimit: Inventory = new Inventory();
+    @type("string") public inRange: string;
 
     constructor () {
         super();
