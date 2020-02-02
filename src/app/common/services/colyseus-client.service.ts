@@ -24,7 +24,7 @@ export class ColyseusClientService {
   private _leaveSubject: Subject<null> = new Subject<null>();
 
   constructor(private readonly ngbModal: NgbModal) {
-    this._client = new Colyseus.Client(`ws://${ environment.serverUrl }`);
+    this._client = new Colyseus.Client(environment.serverUrl);
   }
 
   player$(): Observable<Player> {
