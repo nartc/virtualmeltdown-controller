@@ -23,6 +23,10 @@ export class ColyseusClientService {
     this._client = new Colyseus.Client('ws://localhost:3000');
   }
 
+  player$(): Observable<Player> {
+    return this._playerSubject.asObservable();
+  }
+
   isConnected$(): Observable<boolean> {
     return of(this._room)
       .pipe(map(room => !!room));

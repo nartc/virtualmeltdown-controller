@@ -5,7 +5,10 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
   template: `
     <div class="info-button-container d-flex">
       <img [src]="imgSrc" alt="" class="info-button-icon">
-      <div class="info-button-text">{{title}}</div>
+      <div class="d-flex flex-column info-button-text">
+        <span>{{title}}</span>
+        <small>{{item}} / {{itemLimit}}</small>
+      </div>
     </div>
   `,
   styles: [`
@@ -34,6 +37,8 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 export class InfoButtonSvgComponent implements OnInit {
   @Input() title: string;
   @Input() imgSrc: string;
+  @Input() item: number = 0;
+  @Input() itemLimit: number = 0;
 
   constructor() { }
 
