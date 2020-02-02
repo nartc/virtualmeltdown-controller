@@ -68,6 +68,7 @@ export class ColyseusClientService {
       message.vector.y = vector.y;
       message.username = this._nameSubject.value;
       message.eventType = 'move';
+      message.playerId = this._playerSubject.value.id;
       this._room.send(message);
     } catch (e) {
       // TODO: handle error

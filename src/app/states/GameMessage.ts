@@ -11,6 +11,7 @@ import { Schema, type, ArraySchema, MapSchema, DataChange } from "@colyseus/sche
 export class GameMessage extends Schema {
     @type("string") public eventType: string;
     @type("string") public username: string;
+    @type("string") public playerId: string;
 
     constructor () {
         super();
