@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { ColyseusClientService } from '../common/services/colyseus-client.service';
 import { Player } from '../states/Player';
 
@@ -25,11 +25,12 @@ import { Player } from '../states/Player';
                                [color]="color.value"
                                [inRange]="player.inRange"
                                [imgSrc]="color.image"
-                               [title]="color.title"
+                               [title]="color.label"
                                [item]="player.inventory[color.value]"
                                [itemLimit]="player.inventoryLimit[color.value]"></app-info-button-svg>
         </div>
       </div>
+    </div>
   `,
   styles: [
       `.root-background {
@@ -41,14 +42,14 @@ import { Player } from '../states/Player';
       padding: 0;
     }
 
-      .exit-button {
-        background-color: black;
-        color: #40ebee;
-        border: 1px solid #40ebee;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-      }
+    .exit-button {
+      background-color: black;
+      color: #40ebee;
+      border: 1px solid #40ebee;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,7 +82,7 @@ export class ControllerContainerComponent implements OnInit, OnDestroy {
     this.colyseusClientService.move(vector);
   }
 
-  onClickExit(){
+  onClickExit() {
     this.router.navigate(['/join']);
   }
 

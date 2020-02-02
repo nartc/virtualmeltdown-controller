@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
     <button type="button"
             class="info-button-container d-flex"
             (click)="deposit.emit()"
-            [disabled]="!inRange"
+            [disabled]="!inRange || !item"
             [ngClass]="{glow: inRange === color}">
       <img [src]="imgSrc" alt="" class="info-button-icon">
       <div class="d-flex flex-column info-button-text">
@@ -23,11 +23,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
         height: 70px;
         color: #40ebee;
         border: 1px solid #40ebee;
+        opacity: 1;
+        background-color: black;
+        transition: opacity 200ms ease-in-out;
       }
 
       .info-button-container:disabled {
-        background-color: black;
-        border: 1px solid #40ebee;
+        opacity: 0.5;
       }
 
       .info-button-container.glow {

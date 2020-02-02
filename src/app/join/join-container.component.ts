@@ -49,7 +49,7 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
         <h4>JOIN AS</h4>
       </div>
       <div class="row w-100">
-          <div class="d-flex">
+          <div class="d-flex w-100 join-as-buttons">
             <button class="select-bot-button" (click)="onJoin('a')"><img src="assets/gif/cubot.gif" alt="">CUBE_BOT</button>
             <button class="select-bot-button" (click)="onJoin('b')"><img src="assets/gif/spiderbot.gif" alt="">SPIDER_BOT</button>
             <button class="select-bot-button" (click)="onJoin('c')"><img src="assets/gif/spherebot.gif" alt="">SPHERE_BOT</button>
@@ -64,8 +64,15 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
       width: 100%;
       color: #40ebee;
     }
+
+    .join-as-buttons {
+      justify-content: space-evenly;
+    }
+
     .select-bot-button {
       color: #40ebee;
+      background-color: transparent;
+      border: none;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush

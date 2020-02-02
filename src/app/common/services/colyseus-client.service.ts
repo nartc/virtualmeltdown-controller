@@ -18,7 +18,7 @@ import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 export class ColyseusClientService {
   private _client: Colyseus.Client;
   private _room: Colyseus.Room<GameState>;
-  private _nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem(
+  private _nameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(sessionStorage.getItem(
     'virtualmeltdown_username') || '');
   private _playerSubject: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
   private _leaveSubject: Subject<null> = new Subject<null>();
@@ -46,16 +46,18 @@ export class ColyseusClientService {
 
   setName(name: string) {
     this._nameSubject.next(name);
-    localStorage.setItem('virtualmeltdown_username', name);
+    sessionStorage.setItem('virtualmeltdown_username', name);
   }
 
   setRoom(room: Colyseus.Room<GameState>) {
-    console.log('setRoom', { ...room });
     this._room = room;
     this._room.state.players.onChange = changes => {
-      this._playerSubject.next(changes);
+      if (!this._playerSubject.value || (changes.id === this._playerSubject.value.id)) {
+        this._playerSubject.next(changes);
+      }
     };
-    this._room.connection.onCloseCallback = this._leaveSubject.next.bind(this._leaveSubject);
+
+    this._room.onLeave(this._leaveSubject.next.bind(this._leaveSubject));
   }
 
   create() {
