@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
             class="info-button-container d-flex"
             (click)="deposit.emit()"
             [disabled]="!inRange || !item"
-            [ngClass]="{glow: inRange === color}">
+            [ngClass]="{glow: inRange && item}">
       <img [src]="imgSrc" alt="" class="info-button-icon">
       <div class="d-flex flex-column info-button-text">
         <span>{{title}}</span>
@@ -52,25 +52,25 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 
       @keyframes neonGlow {
         0% {
-          box-shadow: 0 0 10px rgba(255,255,255,.8),
-          0 0 20px rgba(255,255,255,.8),
-          0 0 22px  rgba(255,255,255,.8),
-          0 0 40px  rgba(66,220,219,.8),
-          0 0 60px  rgba(66,220,219,.8),
-          0 0 80px  rgba(66,220,219,.5),
-          0 0 100px rgba(66,220,219,.5),
-          0 0 140px rgba(66,220,219,.5),
-          0 0 200px rgba(66,220,219,.5);
+          box-shadow: 0 0 10px rgba(255, 255, 255, .8),
+          0 0 20px rgba(255, 255, 255, .8),
+          0 0 22px rgba(255, 255, 255, .8),
+          0 0 40px rgba(66, 220, 219, .8),
+          0 0 60px rgba(66, 220, 219, .8),
+          0 0 80px rgba(66, 220, 219, .5),
+          0 0 100px rgba(66, 220, 219, .5),
+          0 0 140px rgba(66, 220, 219, .5),
+          0 0 200px rgba(66, 220, 219, .5);
         }
         100% {
-          box-shadow: 0 0 2px rgba(255,255,255,.8),
-          0 0 8px rgba(255,255,255,.8),
-          0 0 10px rgba(255,255,255,.8),
-          0 0 20px rgba(66,220,219,.8),
-          0 0 30px rgba(66,220,219,.8),
-          0 0 40px rgba(66,220,219,.8),
-          0 0 50px rgba(66,220,219,.5),
-          0 0 80px rgba(66,220,219,.5);
+          box-shadow: 0 0 2px rgba(255, 255, 255, .8),
+          0 0 8px rgba(255, 255, 255, .8),
+          0 0 10px rgba(255, 255, 255, .8),
+          0 0 20px rgba(66, 220, 219, .8),
+          0 0 30px rgba(66, 220, 219, .8),
+          0 0 40px rgba(66, 220, 219, .8),
+          0 0 50px rgba(66, 220, 219, .5),
+          0 0 80px rgba(66, 220, 219, .5);
         }
       }
     `
