@@ -66,8 +66,8 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
     }
 
     .bot-image {
-      height: 115px;
-      width: 115px;
+      height: 100px;
+      width: 100px;
     }
 
     .join-as-buttons {
