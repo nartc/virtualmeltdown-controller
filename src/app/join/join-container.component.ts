@@ -42,7 +42,7 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
   styles: [`
     .join-container {
       background-color: black;
-      background-image: URL('assets/svg/backgroundPattern.svg');
+      background-image: URL('assets/svg/backPattern.svg');
       width: 100%;
       color: #40ebee;
     }
