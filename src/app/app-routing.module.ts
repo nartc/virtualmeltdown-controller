@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ControllerGuard } from './guards/controller.guard';
+import { HomeComponent } from './common/containers/home/home.component';
+import { ControllerGuard } from './common/guards/controller.guard';
 
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'join', pathMatch: 'full'
+    path: '', component: HomeComponent,
   },
   {
     path: 'join', loadChildren: () => import('./join/join.module').then(m => m.JoinModule)

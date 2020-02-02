@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { ColyseusClientService } from '../services/colyseus-client.service';
+import { ColyseusClientService } from '../common/services/colyseus-client.service';
 import { Player } from '../states/Player';
 
 @Component({

@@ -4,13 +4,13 @@ import * as Colyseus from 'colyseus.js';
 import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { ErrorDialogComponent } from '../layouts/error-dialog.component';
-import { DepositMessage } from '../states/DepositMessage';
-import { GameRoomAuthOptions } from '../states/GameRoomAuthOptions';
-import { GameState } from '../states/GameState';
-import { MoveMessage } from '../states/MoveMessage';
-import { Player } from '../states/Player';
+import { DepositMessage } from '../../states/DepositMessage';
+import { GameRoomAuthOptions } from '../../states/GameRoomAuthOptions';
+import { GameState } from '../../states/GameState';
+import { MoveMessage } from '../../states/MoveMessage';
+import { Player } from '../../states/Player';
 
 @Injectable({
   providedIn: 'root'

@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ErrorDialogComponent } from '../layouts/error-dialog.component';
-import { ColyseusClientService } from '../services/colyseus-client.service';
+import { ErrorDialogComponent } from '../common/layouts/error-dialog.component';
+import { ColyseusClientService } from '../common/services/colyseus-client.service';
 
 @Component({
   selector: 'app-join-container',

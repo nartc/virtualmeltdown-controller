@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColyseusClientService } from './services/colyseus-client.service';
+import { ColyseusClientService } from './common/services/colyseus-client.service';
 
 @Component({
   selector: 'app-root',
