@@ -14,7 +14,7 @@ import { Player } from '../states/Player';
                              [playerName]="player.name"
                              [playerMessage]="playerMessage"></player-info-container>
       <div class="col-2 position-relative">
-        <h6 class="text-danger mb-0">Leave Button</h6>
+        <button class="exit-button" (click)="onClickExit()">EXIT</button>
       </div>
       <div class="col-4 position-relative" appJoystick (move)="onMove($event)"></div>
       <div class="col-8 position-relative">
@@ -39,7 +39,17 @@ import { Player } from '../states/Player';
       background-size: cover;
       margin: 0;
       padding: 0;
-    }`
+    }
+
+      .exit-button {
+        background-color: black;
+        color: #40ebee;
+        border: 1px solid #40ebee;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+    `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -71,8 +81,8 @@ export class ControllerContainerComponent implements OnInit, OnDestroy {
     this.colyseusClientService.move(vector);
   }
 
-  onPress(label: string) {
-
+  onClickExit(){
+    this.router.navigate(['/join']);
   }
 
   ngOnDestroy(): void {
