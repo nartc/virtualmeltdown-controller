@@ -8,7 +8,7 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
 @Component({
   selector: 'app-join-container',
   template: `
-    <form class="container d-flex flex-column align-items-center justify-content-center w-100 h-100"
+    <form class="container d-flex flex-column align-items-center justify-content-center w-100 h-100 join-container"
           [formGroup]="form"
           (ngSubmit)="onJoin()"
           novalidate>
@@ -60,11 +60,22 @@ import { ColyseusClientService } from '../services/colyseus-client.service';
         </div>
       </div>
       <div class="w-100 text-center">
-        <button class="btn btn-primary btn-lg" type="submit" [disabled]="form.invalid">JOIN</button>
+        <button class="btn join-button btn-lg" type="submit" [disabled]="form.invalid">JOIN</button>
       </div>
     </form>
   `,
-  styles: [],
+  styles: [`
+    .join-container {
+      background-color: black;
+      background-image: URL('assets/svg/backPattern.svg');
+      width: 100%;
+      color: #40ebee;
+    }
+    .join-button {
+      background-color: #40ebee;
+      color: black;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JoinContainerComponent implements OnInit {
