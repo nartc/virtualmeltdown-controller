@@ -20,3 +20,10 @@ steps:
 
 - script: npx ng build --prod
   displayName: 'Build production'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'dist/gamejam2020-controller'
+    ArtifactName: 'gamejam-controller'
+    PublishLocation: 'Container'
+  displayName: 'Publish Artifacts'
