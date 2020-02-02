@@ -48,11 +48,11 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
       <div class="row w-100 d-flex justify-content-center">
         <h4>JOIN AS</h4>
       </div>
-      <div class="row w-100">
+      <div class="row m-0 p-0 w-100">
           <div class="d-flex w-100 join-as-buttons">
-            <button class="select-bot-button" (click)="onJoin('a')"><img src="assets/gif/cubot.gif" alt="">CUBE_BOT</button>
-            <button class="select-bot-button" (click)="onJoin('b')"><img src="assets/gif/spiderbot.gif" alt="">SPIDER_BOT</button>
-            <button class="select-bot-button" (click)="onJoin('c')"><img src="assets/gif/spherebot.gif" alt="">SPHERE_BOT</button>
+            <button class="select-bot-button" (click)="onJoin('a')"><img class="bot-image" src="assets/gif/cubot.gif" alt="">CUBE_BOT</button>
+            <button class="select-bot-button" (click)="onJoin('b')"><img class="bot-image" src="assets/gif/spiderbot.gif" alt="">SPIDER_BOT</button>
+            <button class="select-bot-button" (click)="onJoin('c')"><img class="bot-image" src="assets/gif/spherebot.gif" alt="">SPHERE_BOT</button>
           </div>
         </div>
     </form>
@@ -60,9 +60,14 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
   styles: [`
     .join-container {
       background-color: black;
-      background-image: URL('assets/svg/backPattern.svg');
+      background-image: url('assets/svg/backPattern.svg');
       width: 100%;
       color: #40ebee;
+    }
+
+    .bot-image {
+      height: 115px;
+      width: 115px;
     }
 
     .join-as-buttons {
