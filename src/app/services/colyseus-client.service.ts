@@ -4,6 +4,7 @@ import * as Colyseus from 'colyseus.js';
 import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { ErrorDialogComponent } from '../layouts/error-dialog.component';
 import { DepositMessage } from '../states/DepositMessage';
 import { GameRoomAuthOptions } from '../states/GameRoomAuthOptions';
@@ -22,7 +23,7 @@ export class ColyseusClientService {
   private _leaveSubject: Subject<null> = new Subject<null>();
 
   constructor(private readonly ngbModal: NgbModal) {
-    this._client = new Colyseus.Client('ws://localhost:3000');
+    this._client = new Colyseus.Client(`ws://${ environment.serverUrl }`);
   }
 
   player$(): Observable<Player> {
@@ -116,7 +117,7 @@ export class ColyseusClientService {
       this._room.send(message);
     } catch (e) {
       // TODO: handle error
-      return ;
+      return;
     }
   }
 }
