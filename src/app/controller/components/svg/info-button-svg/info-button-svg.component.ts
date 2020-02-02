@@ -25,6 +25,15 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
         border: 1px solid #40ebee;
       }
 
+      .info-button-container:disabled {
+        background-color: black;
+        border: 1px solid #40ebee;
+      }
+
+      .info-button-container.glow {
+        animation: neonGlow 2s infinite alternate
+      }
+
       .info-button-icon {
         background: rgba(64, 235, 238, .2);
         border: 1px solid #40ebee;
@@ -37,6 +46,30 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
         margin-top: 10px;
         margin-right: 10px;
         padding: 0;
+      }
+
+      @keyframes neonGlow {
+        0% {
+          box-shadow: 0 0 10px rgba(255,255,255,.8),
+          0 0 20px rgba(255,255,255,.8),
+          0 0 22px  rgba(255,255,255,.8),
+          0 0 40px  rgba(66,220,219,.8),
+          0 0 60px  rgba(66,220,219,.8),
+          0 0 80px  rgba(66,220,219,.5),
+          0 0 100px rgba(66,220,219,.5),
+          0 0 140px rgba(66,220,219,.5),
+          0 0 200px rgba(66,220,219,.5);
+        }
+        100% {
+          box-shadow: 0 0 2px rgba(255,255,255,.8),
+          0 0 8px rgba(255,255,255,.8),
+          0 0 10px rgba(255,255,255,.8),
+          0 0 20px rgba(66,220,219,.8),
+          0 0 30px rgba(66,220,219,.8),
+          0 0 40px rgba(66,220,219,.8),
+          0 0 50px rgba(66,220,219,.5),
+          0 0 80px rgba(66,220,219,.5);
+        }
       }
     `
   ],

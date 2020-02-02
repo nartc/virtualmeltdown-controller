@@ -9,9 +9,8 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
 @Component({
   selector: 'app-join-container',
   template: `
-    <form class="container d-flex flex-column align-items-center justify-content-center w-100 h-100 join-container"
+    <form class=" d-flex flex-column align-items-center justify-content-center w-100 h-100 join-container"
           [formGroup]="form"
-          (ngSubmit)="onJoin()"
           novalidate>
       <div class="row w-100">
         <div class="col-6 offset-3">
@@ -46,40 +45,29 @@ import { ColyseusClientService } from '../common/services/colyseus-client.servic
           </div>
         </div>
       </div>
+      <div class="row w-100 d-flex justify-content-center">
+        <h4>JOIN AS</h4>
+      </div>
       <div class="row w-100">
-        <div class="col-6 offset-3">
-          <div class="form-group text-center">
-            <label for="type" class="h5">TYPE</label>
-            <app-dropdown-control formControlName="type"
-                                  [ngClass]="{'is-invalid': form.get('type').touched && form.get('type').errors}"
-                                  [items]="robotTypes"
-                                  [label]="'Select type'"></app-dropdown-control>
-            <div class="invalid-feedback" *ngIf="form.get('type').touched && form.get('type').errors">
-              <small>Type is required</small>
-            </div>
+          <div class="d-flex">
+            <button class="select-bot-button" (click)="onJoin('a')"><img src="assets/gif/cubot.gif" alt="">CUBE_BOT</button>
+            <button class="select-bot-button" (click)="onJoin('b')"><img src="assets/gif/spiderbot.gif" alt="">SPIDER_BOT</button>
+            <button class="select-bot-button" (click)="onJoin('c')"><img src="assets/gif/spherebot.gif" alt="">SPHERE_BOT</button>
           </div>
         </div>
-      </div>
-      <div class="w-100 text-center">
-        <button class="btn join-button btn-lg" type="submit" [disabled]="form.invalid">JOIN</button>
-      </div>
     </form>
   `,
-  styles: [
-      `
-      .join-container {
-        background-color: black;
-        background-image: URL('assets/svg/backPattern.svg');
-        width: 100%;
-        color: #40ebee;
-      }
-
-      .join-button {
-        background-color: #40ebee;
-        color: black;
-      }
-    `
-  ],
+  styles: [`
+    .join-container {
+      background-color: black;
+      background-image: URL('assets/svg/backPattern.svg');
+      width: 100%;
+      color: #40ebee;
+    }
+    .select-bot-button {
+      color: #40ebee;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JoinContainerComponent implements OnInit {
@@ -103,7 +91,6 @@ export class JoinContainerComponent implements OnInit {
     this.form = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
       roomId: ['', Validators.required],
-      type: ['', Validators.required]
     });
 
     this.colyseusClientService.username$().pipe(take(1)).subscribe(val => {
@@ -113,8 +100,8 @@ export class JoinContainerComponent implements OnInit {
     });
   }
 
-  onJoin() {
-    const { roomId, username, type } = this.form.value;
+  onJoin(type: string = 'b') {
+    const { roomId, username } = this.form.value;
     this.colyseusClientService.join(roomId, username, type)
       .subscribe(room => {
         this.colyseusClientService.setRoom(room);
