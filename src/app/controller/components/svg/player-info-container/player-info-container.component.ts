@@ -7,7 +7,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
       <img [src]="robotGifMap[playerType]" alt="" class="spider-anim">
       <div class="player-text-container">
         <h3 class="player-text">{{playerName}}</h3>
-        <p class="player-text">{{playerMessage}}</p>
+        <p class="player-text">{{robotBlurbMap[playerType]}}</p>
       </div>
     </div>
   `,
@@ -39,6 +39,12 @@ export class PlayerInfoContainerComponent implements OnInit {
     a: "assets/gif/cubot.gif",
     b: "assets/gif/spiderbot.gif",
     c: "assets/gif/spherebot.gif"
+  };
+
+  robotBlurbMap = {
+    a: "CUBE_BOT - All around balanced drone. Average inventory capacity and average speed. The best of both worlds.",
+    b: "SPIDER_BOT - High inventory at the expense of lower speed.",
+    c: "SPHERE_BOT - High speed at the expense of lower inventory capacity"
   };
 
   constructor() { }
