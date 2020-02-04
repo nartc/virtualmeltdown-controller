@@ -1,0 +1,22 @@
+<div class="container-fluid row h-100 w-100 m-0 p-0 grid-background" *ngIf="player$ | async as player">
+  <player-info-display class="col-10"
+                         [playerType]="player.type"
+                         [playerName]="player.name"></player-info-display>
+  <div class="col-2 position-relative">
+    <button class="exit-button" (click)="onClickExit()">EXIT</button>
+  </div>
+  <div class="col-4 position-relative" appJoystick (move)="onMove($event)"></div>
+  <div class="col-8 position-relative">
+    <div class="row m-0 p-0">
+      <app-player-inventory-button *ngFor="let pickup of pickups"
+                           class="col-6"
+                           (deposit)="onDeposit(pickup.color.value)"
+                           [color]="pickup.color.value"
+                           [inRange]="player.inRange"
+                           [imgSrc]="pickup.imageUrl"
+                           [title]="pickup.color.label"
+                           [item]="player.inventory[pickup.color.value]"
+                           [itemLimit]="player.inventoryLimit[pickup.color.value]"></app-player-inventory-button>
+    </div>
+  </div>
+</div>

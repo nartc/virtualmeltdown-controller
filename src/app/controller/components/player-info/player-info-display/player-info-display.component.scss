@@ -1,0 +1,16 @@
+@import "../../../../common/styles/colors";
+
+.spider-anim {
+  border: 1px solid $primary;
+}
+.player-text {
+  color: $primary;
+  padding-top: 0.2rem;
+  padding-left: .5rem;
+}
+.player-container {
+  margin: .5rem;
+}
+.player-text-container {
+  width: 500px;
+}

@@ -1,0 +1,30 @@
+@import "../../../../common/styles/colors";
+
+.inventory-button-container {
+  margin-top: 20px;
+  width: 200px;
+  height: 70px;
+  color: $primary;
+  border: 1px solid $primary;
+  opacity: 1;
+  background-color: $black;
+  transition: opacity 200ms ease-in-out;
+}
+
+.inventory-button-container:disabled {
+  opacity: 0.5;
+}
+
+.inventory-button-icon {
+  border: 1px solid $primary;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+.inventory-button-text {
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 0;
+}
+

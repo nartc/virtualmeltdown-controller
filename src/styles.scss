@@ -1,6 +1,3 @@
-html, body {
-  height: 100%;
-  font-size: 1rem;
-  font-family: 'Orbitron', sans-serif;
-  background-color: black;
-}
+@import "app/common/styles/global";
+@import "app/common/styles/colors";
+@import "app/common/styles/button";

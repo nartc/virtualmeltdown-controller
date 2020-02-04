@@ -1,0 +1,17 @@
+.root-background {
+  background-color: black;
+  background-image: url('/assets/svg/backPattern.svg');
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+.exit-button {
+  background-color: black;
+  color: #40ebee;
+  border: 1px solid #40ebee;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
